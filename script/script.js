@@ -25,10 +25,12 @@ function play(){
         if(cpu === 0 && player === 1 || cpu===1 && player ===2 || cpu===2 && player===0){
             console.clear();
             console.log("Ganaste");
+            return 1;
         }
     else {
         console.clear()
         console.log("Perdiste");
+        return 0;
     }
 }
 
@@ -41,5 +43,27 @@ function getplayerSelection(){
         return 1
     else 
     return 2
+}
+
+function playgame(){
+    let victorias = 0;
+    let derrotas = 0;
+    let resultado;
+    while(victorias <5 && derrotas <5){
+        console.log("victorias: "+victorias);
+        console.log("derrotas: " +derrotas);
+        resultado = play();
+        if(resultado === 1)
+            victorias++;
+        else
+            derrotas++;
+    }
+    if(victorias===5)
+        console.log("Ganaste la ronda");
+    else
+        console.log("Perdiste la ronda");
+    console.log("victorias: "+victorias);
+    console.log("derrotas: " +derrotas);
+
 
 }
