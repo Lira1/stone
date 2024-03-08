@@ -1,69 +1,87 @@
-//Piedra    == 0
-//Papel     == 1
-//Tijeras   == 2
+// // //Piedra    == 0
+// // //Papel     == 1
+// // //Tijeras   == 2
+// // //git push origin rps-ui para hacer push a la rama
 
-function getComputerChoice(){
-    //Funcion para obtener un resultado randomizado de la consola
-    let cpu = Math.floor(Math.random()*3);
-    //console.clear();
-    console.log("Eleccion del CPU: "+cpu);
-    return cpu
-}
 
-function play(){
-    console.log("Piedra = 0");
-    console.log("Papel = 1");
-    console.log("Tijeras = 2");
-    let cpu = getComputerChoice();
-    let player = getplayerSelection();
-    if (cpu === player){
-        console.clear();
-        console.log("EMPATE!!!!");
-        play();
+
+// const estado = document.querySelector('#estado');
+
+let seleccionJugador;
+let selecionCPU;
+const spanPlayer = document.querySelector('#player')
+const spanCPU  = document.querySelector('#cpu')
+const contadorVictorias = document.querySelector('#victorias');
+const contadorDettotas = document.querySelector('#derrotas');
+const estadoCompeticion = document.querySelector('#estado');
+const resultadoFinal = document.querySelector('#resultado')
+
+let victorias =0;
+let derrotas = 0;
+
+ function getSeleccion(idBotonSeleccionado){
+     if(idBotonSeleccionado === "piedra"){    
+        seleccionJugador = 0;
+        spanPlayer.textContent = "Piedra";
+     }
+     else if(idBotonSeleccionado === "papel"){
+        seleccionJugador = 1;
+        spanPlayer.textContent = "Papel";
     }
+     else{
+        seleccionJugador = 2;
+        spanPlayer.textContent = "Tijeras";
+     }
+    selecionCPU=getComputerChoice();
+    if(selecionCPU===0)
+        spanCPU.textContent = "Piedra";
+    else if (selecionCPU === 1)
+        spanCPU.textContent = "Papel";
     else
-        if(cpu === 0 && player === 1 || cpu===1 && player ===2 || cpu===2 && player===0){
-            console.clear();
-            console.log("Ganaste");
-            return 1;
-        }
-    else {
-        console.clear()
-        console.log("Perdiste");
-        return 0;
+        spanCPU.textContent = "Tijeras"
+    console.log(seleccionJugador);
+    console.log(selecionCPU);
+    if(selecionCPU === seleccionJugador){
+        estadoCompeticion.textContent = "Empate";
     }
-}
+     else if( selecionCPU === 0 && seleccionJugador === 1 || selecionCPU === 1 && seleccionJugador === 2 || selecionCPU === 2 && seleccionJugador ===0){
+        victorias++;
+         estadoCompeticion.textContent = 'Ganaste!!!';
+         contadorVictorias.textContent = victorias;
+     }
+     else{
+        derrotas++
+         estadoCompeticion.textContent = 'Perdiste!!!'
+         contadorDettotas.textContent = derrotas;
+     }
+     resetGame();
+ }
 
-function getplayerSelection(){
-    let pSelection = prompt("Piedra, papel o tijeras?")
-    pSelection.toLowerCase();
-    if(pSelection==="piedra")
-        return 0
-    else if(pSelection ==="papel")
-        return 1
-    else 
-    return 2
-}
-
-function playgame(){
-    let victorias = 0;
-    let derrotas = 0;
-    let resultado;
-    while(victorias <5 && derrotas <5){
-        console.log("victorias: "+victorias);
-        console.log("derrotas: " +derrotas);
-        resultado = play();
-        if(resultado === 1)
-            victorias++;
+  function getComputerChoice(){
+      //Funcion para obtener un resultado randomizado de la consola
+      let cpu = Math.floor(Math.random()*3);
+      //console.log("Eleccion del CPU: "+cpu);
+      return cpu
+  }
+    
+function resetGame(){
+    if(victorias === 5 || derrotas === 5){
+        if(victorias===5)
+            resultadoFinal.textContent = "Ganaste la partida";
         else
-            derrotas++;
+            resultadoFinal.textContent = "CPU Gano la partida";
+       
+
     }
-    if(victorias===5)
-        console.log("Ganaste la ronda");
-    else
-        console.log("Perdiste la ronda");
-    console.log("victorias: "+victorias);
-    console.log("derrotas: " +derrotas);
+}
 
-
+function playAgain(){
+    victorias = 0;
+    derrotas = 0;
+    contadorVictorias.textContent = victorias;
+    contadorDettotas.textContent = derrotas;
+    resultadoFinal.textContent = '';
+    estadoCompeticion.textContent = '';
+    spanPlayer.textContent=''
+    spanCPU.textContent='';
 }

@@ -5,12 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piedra papel o tijeres</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <script src="./script/script.js"></script>
+    <!-- <script src="./script/script.js"></script> -->
 </head>
 <body>
     <h1>Proyecto de piedra, papel o tijeras</h1>
-    <button onclick="playgame();">Jugar</button>
-
-
+    <!-- <button onclick="playgame();">Jugar</button> -->
+<div class="jugar">
+    <button id="piedra"  onclick="getSeleccion(this.id);">Piedra</button>
+    <button id="papel"   onclick="getSeleccion(this.id);">papel</button>
+    <button id="tijeras" onclick="getSeleccion(this.id);">Tijeras</button>
+</div>
+<div>
+    <div>
+        <p>Tu seleccion: <span id="player"></span></p>
+        <p> Seleccion del CPU: <span id="cpu"></span></p>
+    </div>
+    <div>
+        <p>Resultado: <span id="estado">a</span></p>
+    </div>
+    <div>
+        <p>Contador de victorias:<span id="victorias">0</span> </p>
+    </div>
+    <div>
+        <p>Contador de derrotas: <span id="derrotas">0</span>  </p>
+    </div>
+    <div>
+        <p><span id="resultado"></span></p>
+    </div>
+</div>
+<button id="playAgain" onclick="playAgain()">Reiniciar la partida</button>
+<script src="./script/script.js"></script>
 </body>
 </html>
